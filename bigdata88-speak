@@ -1,0 +1,23 @@
+# 語系要選zh-tw才會正確發音
+
+!pip install gTTS
+!pip install pygame
+
+from gtts import gTTS
+tts = gTTS(text='大大安安幾歲您好', lang='zh-tw')  # 語系要選zh-tw才會正確發音
+tts.save("hello4.mp3")
+
+from pygame import mixer
+mixer.init()
+mixer.music.load('hello4.mp3')
+mixer.music.play()
+
+import tempfile
+def speak(sentence):
+    with tempfile.NamedTemporaryFile(delete=True) as fp:
+        tts = gTTS(text=sentence, lang='zh-tw')  # 語系要選zh-tw才會正確發音
+        tts.save("{}.mp3".format(fp.name))
+        mixer.music.load('{}.mp3'.format(fp.name))
+        mixer.music.play()
+ 
+ speak('昨天動員300名工作人員維持秩序')
