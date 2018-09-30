@@ -1,0 +1,24 @@
+# [Open Jarvis] 如何用不到30行Python程式碼寫出「真‧對話機器人」?
+# 問題應該又是出在colab伺服器無法有自己的麥克風, 只好改用ipython或回自己電腦的Jupyter來實作
+# https://www.youtube.com/watch?v=Y2t68jDwfhc
+
+# https://github.com/ywchiu/largitdata/tree/master/code
+
+# https://pypi.org/project/SpeechRecognition/
+
+# Could not find PyAudio; check installation"
+
+!pip install pyaudio
+
+!pip install SpeechRecognition
+
+import speech_recognition
+r = speech_recognition.Recognizer()
+
+# 執行以下三行碼後 可說一段話
+with speech_recognition.Microphone() as source:
+    r.adjust_for_ambient_noise(source)
+    audio = r.listen(source)
+    
+# 電腦將上面說的話 轉成文字    
+r.recognize_google(audio, language='zh-TW')
